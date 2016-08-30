@@ -1,0 +1,32 @@
+image: docker:git
+services:
+- docker:dind
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+
+
+clone_debian:
+  script:
+    - docker pull armv7/armhf-debian:8
+    - docker tag armv7/armhf-debian:8 registry.gitlab.com/gbraad/arm:armhf-debian-8
+    - docker push registry.gitlab.com/gbraad/arm:armhf-debian-8
+  only:
+    - master
+
+clone_fedora:
+  script:
+    - docker pull armv7/armhf-fedora:23
+    - docker tag armv7/armhf-fedora:23 registry.gitlab.com/gbraad/arm:armhf-fedora-23
+    - docker push registry.gitlab.com/gbraad/arm:armhf-fedora-23
+  only:
+    - master
+
+clone_ubuntu:
+  script:
+    - docker pull armv7/armhf-ubuntu:16.04
+    - docker tag armv7/armhf-ubuntu:16.04 registry.gitlab.com/gbraad/arm:armhf-ubuntu-16.04
+    - docker push registry.gitlab.com/gbraad/arm:armhf-ubuntu-16.04
+  only:
+    - master
+
