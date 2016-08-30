@@ -6,6 +6,15 @@ before_script:
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
 
 
+clone_centos7:
+  script:
+    - docker pull gbraad/armhf-centos:7
+    - docker tag gbraad/armhf-centos:7 registry.gitlab.com/gbraad/arm:armhf-centos-7
+    - docker push registry.gitlab.com/gbraad/arm:armhf-centos-7
+  only:
+    - master
+  when: manual
+
 clone_debian:
   script:
     - docker pull armv7/armhf-debian:8

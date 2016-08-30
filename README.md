@@ -8,6 +8,8 @@ Docker repository
 
 ### Cloned
 
+  * CentOS 7 [Source](https://hub.docker.com/r/gbraad/armhf-centos/)  
+    `docker pull registry.gitlab.com/gbraad/arm:armhf-centos-7`
   * Debian (jessie / 8) [Source](https://hub.docker.com/r/armv7/armhf-debian/)  
     `docker pull registry.gitlab.com/gbraad/arm:armhf-debian-8`
   * Fedora 24 [Source](https://hub.docker.com/r/gbraad/armhf-fedora/)  
