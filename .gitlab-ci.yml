@@ -13,6 +13,7 @@ clone_debian:
     - docker push registry.gitlab.com/gbraad/arm:armhf-debian-8
   only:
     - master
+  when: manual
 
 clone_fedora:
   script:
@@ -21,6 +22,7 @@ clone_fedora:
     - docker push registry.gitlab.com/gbraad/arm:armhf-fedora-23
   only:
     - master
+  when: manual
 
 clone_ubuntu:
   script:
@@ -29,4 +31,4 @@ clone_ubuntu:
     - docker push registry.gitlab.com/gbraad/arm:armhf-ubuntu-16.04
   only:
     - master
-
+  when: manual
