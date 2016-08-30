@@ -15,13 +15,26 @@ clone_debian:
     - master
   when: manual
 
-clone_fedora:
+clone_fedora_23:
   script:
     - docker pull armv7/armhf-fedora:23
     - docker tag armv7/armhf-fedora:23 registry.gitlab.com/gbraad/arm:armhf-fedora-23
     - docker push registry.gitlab.com/gbraad/arm:armhf-fedora-23
   only:
     - master
+  when: manual
+
+build_fedora_24:
+  image: registry.gitlab.com/gbraad/devenv:f24
+  script:
+    - dnf install -y xz
+    - wget https://dl.fedoraproject.org/pub/fedora/linux/releases/24/Spins/armhfp/images/Fedora-Minimal-armhfp-24-1.2-sda.raw.xz -O fedora.raw.xz
+    - unxz fedora.raw.xz
+    - fdisk -l fedora.raw | grep raw3
+    - losetup -r /dev/loop3 fedora.raw -o $((<offset>*512))
+    - mount /dev/loop3 /mnt
+    - tar --numeric-owner -C /mnt -cpvf - . | sudo docker import - registry.gitlab.com/gbraad/arm:armf-fedora-24
+    - docker push registry.gitlab.com/gbraad/arm:armhf-fedora-24
   when: manual
 
 clone_ubuntu:
